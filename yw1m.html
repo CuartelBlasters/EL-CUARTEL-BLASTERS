@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Yo-kai Watch 1 - Traducción</title>
+
+<style>
+body {
+    font-family: Arial;
+    margin: 0;
+    background: #f5f5f5;
+}
+
+/* 🔥 HEADER CON IMAGEN */
+.header {
+    background: url("img/fondomovil.png") center/cover no-repeat;
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+/* OSCURECER FONDO SIN CAJA */
+.header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.3);
+}
+
+/* LOGO DEL JUEGO */
+.game-logo {
+    max-width: 300px;
+    width: 100%;
+    display: block;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+
+    /* 🔥 sombra pro */
+    filter: drop-shadow(0 6px 15px rgba(0,0,0,0.7));
+
+    transition: transform 0.3s ease;
+}
+
+.game-logo:hover {
+    transform: scale(1.05);
+}
+
+/* CONTENEDOR */
+.container {
+    display: flex;
+    justify-content: center;
+    padding: 30px;
+}
+
+/* CARD */
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    max-width: 900px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+/* IMAGEN PRINCIPAL */
+.main-img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    transition: opacity 0.3s ease;
+}
+
+/* GALERÍA */
+.gallery {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.gallery img {
+    width: 150px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.gallery img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+/* BOTÓN */
+.btn {
+    display: inline-block;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding: 10px 18px;
+    background: linear-gradient(135deg, #6c3cff, #9a6cff);
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* VOLVER */
+.back {
+    display: inline-block;
+    margin-top: 20px;
+    color: #555;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.back:hover {
+    color: #000;
+}
+
+/* 📱 RESPONSIVE */
+@media (max-width: 600px) {
+    .header {
+        height: 150px;
+    }
+
+    .game-logo {
+        max-width: 200px;
+    }
+
+    .gallery img {
+        width: 100px;
+        height: 70px;
+    }
+}
+</style>
+
+<script>
+function cambiarImagen(src) {
+    const img = document.getElementById("principal");
+    img.style.opacity = 0;
+
+    setTimeout(() => {
+        img.src = src;
+        img.style.opacity = 1;
+    }, 150);
+}
+</script>
+
+</head>
+
+<body>
+
+<!-- 🔥 HEADER -->
+<div class="header">
+    <img src="img/yw1m.png" class="game-logo" alt="Yo-kai Watch 1 Logo">
+</div>
+
+<div class="container">
+    <div class="card">
+
+        <!-- IMAGEN PRINCIPAL -->
+        <img id="principal" class="main-img" src="img/swmf1.jpg" alt="Imagen principal">
+
+        <!-- GALERÍA -->
+        <div class="gallery">
+            <img src="img/swmf1.jpg" onclick="cambiarImagen(this.src)" alt="img1">
+            <img src="img/swmf2.jpg" onclick="cambiarImagen(this.src)" alt="img2">
+            <img src="img/swmf3.jpg" onclick="cambiarImagen(this.src)" alt="img3">
+            <img src="img/swmf4.jpg" onclick="cambiarImagen(this.src)" alt="img4">
+            <img src="img/swmf5.jpg" onclick="cambiarImagen(this.src)" alt="img5">
+        </div>
+
+        <h2>Traducción al español</h2>
+
+        <p>
+        Este parche traduce completamente el juego al español incluyendo:
+        </p>
+
+        <ul style="text-align:left; display:inline-block;">
+            <li>Textos de interfaz</li>
+            <li>Modo historia (Proximamente)</li>
+            <li>Misiones secundarias (Proximamente)</li>
+            <li>Todas las texturas del juego</li>
+            <li>Video localizado</li>
+            <li>Voces en español</li>
+        </ul>
+
+        <h3>Estado</h3>
+        <p>En proceso pero ya jugable</p>
+
+        <h3>Plataforma</h3>
+        <p>Telefono movil (APK)</p>
+
+        <a href="https://www.mediafire.com/file/yzhs9yw9nxspzrt/YW1_MOVIL_ECB.rar/file" 
+           class="btn" 
+           target="_blank">
+            Descargar parche
+        </a>
+
+        <br>
+        <a href="index.html" class="back">← Volver</a>
+
+    </div>
+</div>
+
+</body>
+</html>

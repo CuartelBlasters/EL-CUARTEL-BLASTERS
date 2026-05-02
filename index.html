@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parches y Traducciones</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+}
+
+/* HEADER */
+.header {
+    background: url("img/fondo.png") center/cover no-repeat;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    padding-left: 60px;
+}
+
+/* HERO */
+.hero-box {
+    background: rgba(0,0,0,0.65);
+    color: white;
+    padding: 20px 30px;
+    border-radius: 15px;
+    max-width: 420px;
+    backdrop-filter: blur(6px);
+}
+
+.hero-top {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.hero-logo {
+    width: 130px;
+    margin: 0;
+    filter: drop-shadow(0 3px 6px rgba(0,0,0,0.4));
+}
+
+.hero-box h1 {
+    margin: 0;
+    font-size: 32px;
+}
+
+.hero-box p {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+/* SEPARADOR */
+.separator {
+    height: 25px;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.25), transparent);
+}
+
+/* LAYOUT */
+.container {
+    display: flex;
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 260px;
+    padding: 15px;
+    background: #f2f2f2;
+}
+
+/* 🔥 REDES EN SIDEBAR */
+.social-sidebar {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    background: white;
+    padding: 10px;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.social-sidebar a img {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.social-sidebar a img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* MÓVIL */
+@media (max-width: 768px) {
+    .social-sidebar a img {
+        width: 36px;
+        height: 36px;
+    }
+}
+
+/* FILTROS */
+.filtro {
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    transition: box-shadow 0.2s ease;
+}
+
+.filtro:hover {
+    box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+}
+
+.filtro label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 6px 0;
+    padding: 6px 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.filtro label:hover {
+    background: #f3f0ff;
+    transform: translateX(4px);
+}
+
+/* BOTÓN */
+.clear-btn {
+    background: #ddd;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    width: 100%;
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+
+/* CONTENT */
+.content {
+    flex: 1;
+    padding: 20px;
+}
+
+.topbar {
+    margin-bottom: 20px;
+}
+
+/* GRID */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+/* CARD */
+.card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 15px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 8px 12px;
+    background: #6c3cff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+    <div class="hero-box">
+        <div class="hero-top">
+            <img src="img/LOGO.png" class="hero-logo">
+            <h1>BIENVENIDO</h1>
+        </div>
+        <p>Descarga nuestras traducciones o juegos de Yo-kai watch.</p>
+    </div>
+</div>
+
+<div class="separator"></div>
+
+<div class="container">
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+
+<!-- 🔥 REDES -->
+<div class="social-sidebar">
+    <a href="https://discord.gg/fyqF6dhfUQ" target="_blank">
+        <img src="img/discord.png" alt="Discord">
+    </a>
+
+    <a href="https://x.com/BlastersESP" target="_blank">
+        <img src="img/twitter.png" alt="Twitter">
+    </a>
+
+    <a href="https://www.youtube.com/@ElCuartelBlasters" target="_blank">
+        <img src="img/youtube.png" alt="YouTube">
+    </a>
+    <a href="https://whatsapp.com/channel/0029Vb7uc9n96H4UAH6NcH2Q" target="_blank">
+        <img src="img/whatssap.png" alt="YouTube">
+    </a>
+
+    <a href="https://www.reddit.com/r/CuartelBlasters/" target="_blank">
+        <img src="img/reddit.png" alt="YouTube">
+    </a>
+</div>
+
+<button class="clear-btn" onclick="limpiar()">Limpiar filtros</button>
+
+<div class="filtro">
+<h3>Plataforma</h3>
+<label><input type="checkbox" value="3ds" onchange="filtrar()"> Nintendo 3DS</label>
+<label><input type="checkbox" value="switch" onchange="filtrar()"> Nintendo Switch</label>
+<label><input type="checkbox" value="movil" onchange="filtrar()"> Smartphone</label>
+</div>
+
+<div class="filtro">
+<h3>Tipo</h3>
+<label><input type="checkbox" value="traduccion" onchange="filtrar()"> Traducción</label>
+<label><input type="checkbox" value="mod" onchange="filtrar()"> Mod</label>
+</div>
+
+<div class="filtro">
+<h3>Estado</h3>
+<label><input type="checkbox" value="completo" onchange="filtrar()"> Completo</label>
+<label><input type="checkbox" value="progreso" onchange="filtrar()"> En progreso</label>
+</div>
+
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+
+<div class="topbar">
+<div id="contador">3 proyectos</div>
+</div>
+
+<div class="grid">
+
+<div class="card" data-plataforma="switch" data-tipo="traduccion" data-estado="progreso" onclick="location.href='yw1.html'">
+<img src="img/SWITCH.png">
+<div class="card-body">
+<b>Yo-kai Watch 1 Switch</b>
+<p>Proyecto en progreso.</p>
+<a href="yw1.html" class="btn">Switch</a>
+</div>
+</div>
+
+<div class="card" data-plataforma="movil" data-tipo="traduccion" data-estado="progreso" onclick="location.href='yw1m.html'">
+<img src="img/movil.png">
+<div class="card-body">
+<b>Yo-kai Watch 1 Smartphone</b>
+<p>Proyecto en progreso.</p>
+<a href="yw2.html" class="btn">Teléfono</a>
+</div>
+</div>
+
+<div class="card" data-plataforma="3ds" data-tipo="traduccion" data-estado="completo" onclick="location.href='blasters2.html'">
+<img src="img/b2.png">
+<div class="card-body">
+<b>Yo-kai Watch Blasters 2</b>
+<p>Traducción completa.</p>
+<a href="blasters2.html" class="btn">3DS</a>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<script>
+function filtrar() {
+    const seleccionados = Array.from(document.querySelectorAll(".sidebar input:checked"))
+        .map(cb => cb.value);
+
+    const cards = document.querySelectorAll(".card");
+    let visibles = 0;
+
+    cards.forEach(card => {
+        const valores = [
+            card.dataset.plataforma,
+            card.dataset.tipo,
+            card.dataset.estado
+        ];
+
+        const coincide = seleccionados.length === 0 ||
+                         seleccionados.every(f => valores.includes(f));
+
+        if (coincide) {
+            card.style.display = "block";
+            visibles++;
+        } else {
+            card.style.display = "none";
+        }
+    });
+
+    document.getElementById("contador").textContent = visibles + " proyectos";
+}
+
+function limpiar() {
+    document.querySelectorAll(".sidebar input").forEach(cb => cb.checked = false);
+    filtrar();
+}
+</script>
+
+</body>
+</html>
