@@ -11,7 +11,7 @@ body {
     background: #f5f5f5;
 }
 
-/* 🔥 HEADER CON IMAGEN */
+/* HEADER */
 .header {
     background: url("img/fondob2.png") center/cover no-repeat;
     height: 220px;
@@ -21,7 +21,6 @@ body {
     position: relative;
 }
 
-/* OSCURECER FONDO SIN CAJA */
 .header::before {
     content: "";
     position: absolute;
@@ -29,12 +28,10 @@ body {
     background: rgba(0,0,0,0.3);
 }
 
-/* LOGO DEL JUEGO */
+/* LOGO */
 .game-logo {
     max-width: 300px;
     width: 100%;
-    display: block;
-    margin: 0 auto;
     position: relative;
     z-index: 1;
     filter: drop-shadow(0 6px 15px rgba(0,0,0,0.7));
@@ -94,11 +91,9 @@ body {
     box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
 
-/* BOTÓN BASE */
+/* BOTONES */
 .btn {
     display: inline-block;
-    margin-top: 15px;
-    margin-bottom: 15px;
     padding: 10px 18px;
     color: white;
     text-decoration: none;
@@ -111,31 +106,42 @@ body {
     transform: translateY(-2px);
 }
 
-/* 🔴 MAGNUM */
+/* GRUPOS */
+.btn-group {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 15px;
+}
+
+/* COLORES */
 .magnum {
     background: linear-gradient(135deg, #ff5f5f, #ff8a8a);
 }
-
 .magnum:hover {
     box-shadow: 0 5px 15px rgba(255,0,0,0.4);
 }
 
-/* 🔵 ESPADA */
 .espada {
     background: linear-gradient(135deg, #5faaff, #8ac6ff);
 }
-
 .espada:hover {
     box-shadow: 0 5px 15px rgba(0,100,255,0.4);
 }
 
-/* 🟢 DLC */
 .dlc {
     background: linear-gradient(135deg, #4caf50, #81c784);
 }
-
 .dlc:hover {
     box-shadow: 0 5px 15px rgba(0,150,0,0.4);
+}
+
+.qrs {
+    background: linear-gradient(135deg, #9c6bff, #c59cff);
+}
+.qrs:hover {
+    box-shadow: 0 5px 15px rgba(140,0,255,0.4);
 }
 
 /* VOLVER */
@@ -144,27 +150,17 @@ body {
     margin-top: 20px;
     color: #555;
     text-decoration: none;
-    transition: color 0.2s;
 }
 
 .back:hover {
     color: #000;
 }
 
-/* 📱 RESPONSIVE */
+/* RESPONSIVE */
 @media (max-width: 600px) {
-    .header {
-        height: 150px;
-    }
-
-    .game-logo {
-        max-width: 200px;
-    }
-
-    .gallery img {
-        width: 100px;
-        height: 70px;
-    }
+    .header { height: 150px; }
+    .game-logo { max-width: 200px; }
+    .gallery img { width: 100px; height: 70px; }
 }
 </style>
 
@@ -184,77 +180,67 @@ function cambiarImagen(src) {
 
 <body>
 
-<!-- 🔥 HEADER -->
 <div class="header">
-    <img src="img/b22.png" class="game-logo" alt="Yo-kai Watch 1 Logo">
+    <img src="img/b22.png" class="game-logo">
 </div>
 
 <div class="container">
-    <div class="card">
+<div class="card">
 
-        <!-- IMAGEN PRINCIPAL -->
-        <img id="principal" class="main-img" src="img/b2f1.png" alt="Imagen principal">
+<img id="principal" class="main-img" src="img/b2f1.png">
 
-        <!-- GALERÍA -->
-        <div class="gallery">
-            <img src="img/b2f1.png" onclick="cambiarImagen(this.src)" alt="img1">
-            <img src="img/b2f2.png" onclick="cambiarImagen(this.src)" alt="img2">
-            <img src="img/b2f3.png" onclick="cambiarImagen(this.src)" alt="img3">
-            <img src="img/b2f4.png" onclick="cambiarImagen(this.src)" alt="img4">
-            <img src="img/b2f5.png" onclick="cambiarImagen(this.src)" alt="img5">
-        </div>
+<div class="gallery">
+    <img src="img/b2f1.png" onclick="cambiarImagen(this.src)">
+    <img src="img/b2f2.png" onclick="cambiarImagen(this.src)">
+    <img src="img/b2f3.png" onclick="cambiarImagen(this.src)">
+    <img src="img/b2f4.png" onclick="cambiarImagen(this.src)">
+    <img src="img/b2f5.png" onclick="cambiarImagen(this.src)">
+</div>
 
-        <h2>Traducción al español</h2>
+<h2>Traducción al español</h2>
 
-        <p>
-        Este parche traduce completamente el juego al español incluyendo:
-        </p>
+<p>Este parche traduce completamente el juego al español incluyendo:</p>
 
-        <ul style="text-align:left; display:inline-block;">
-            <li>Historia principal</li>
-            <li>Misiones secundarias</li>
-            <li>Textos de interfaz</li>
-            <li>Texturas variadas</li>
-            <li>Arena del viajero</li>
-            <li>Banner giratorio de 3DS</li>
-            <li>Voces en español</li>
-            <li>Video de presentación</li>
-            <li>Imágenes de ayuda</li>
-        </ul>
+<ul style="text-align:left; display:inline-block;">
+<li>Historia principal</li>
+<li>Misiones secundarias</li>
+<li>Textos de interfaz</li>
+<li>Texturas variadas</li>
+<li>Arena del viajero</li>
+<li>Banner giratorio de 3DS</li>
+<li>Voces en español</li>
+<li>Video de presentación</li>
+<li>Imágenes de ayuda</li>
+</ul>
 
-        <h3>Estado</h3>
-        <p>Completado</p>
+<h3>Estado</h3>
+<p>Completado</p>
 
-        <h3>Plataforma</h3>
-        <p>Nintendo Switch / Emulador</p>
+<h3>Plataforma</h3>
+<p>Nintendo Switch / Emulador</p>
 
-        <!-- 🔴 BOTONES MAGNUM -->
-        <a href="https://github.com/VictorFcoYPotasio/ElCuartelBlasters_Blasters2_SP/releases/download/v5.0/Blasters-2-Magnum-ElCuartelBlasters.cia" class="btn magnum" target="_blank">
-            Juego Magnum
-        </a>
+<!-- MAGNUM -->
+<div class="btn-group">
+    <a href="https://github.com/VictorFcoYPotasio/ElCuartelBlasters_Blasters2_SP/releases/download/v5.0/Blasters-2-Magnum-ElCuartelBlasters.cia" class="btn magnum" target="_blank">Juego Magnum</a>
+    <a href="https://github.com/VictorFcoYPotasio/ElCuartelBlasters_Blasters2_SP/releases/download/v5.0/Parche-Magnum.cia" class="btn magnum" target="_blank">Update Magnum</a>
+</div>
 
-        <a href="https://github.com/VictorFcoYPotasio/ElCuartelBlasters_Blasters2_SP/releases/download/v5.0/Parche-Magnum.cia" class="btn magnum" target="_blank">
-            Update Magnum
-        </a>
+<!-- ESPADA -->
+<div class="btn-group">
+    <a href="https://github.com/VictorFcoYPotasio/ElCuartelBlasters_Blasters2_SP/releases/download/v5.0/Blasters-2-Espada-ElCuartelBlasters.cia" class="btn espada" target="_blank">Juego Espada</a>
+    <a href="https://github.com/VictorFcoYPotasio/ElCuartelBlasters_Blasters2_SP/releases/download/v5.0/Parche-Espada.cia" class="btn espada" target="_blank">Update Espada</a>
+</div>
 
-        <!-- 🔵 BOTONES ESPADA -->
-        <a href="https://github.com/VictorFcoYPotasio/ElCuartelBlasters_Blasters2_SP/releases/download/v5.0/Blasters-2-Espada-ElCuartelBlasters.cia" class="btn espada" target="_blank">
-            Juego Espada
-        </a>
+<!-- DLC + QRS -->
+<div class="btn-group">
+    <a href="https://drive.google.com/file/d/18dJn6cNvXcCCkce1ftro5ZBNI3q52QMx/view?usp=sharing" class="btn dlc" target="_blank">DLC</a>
+    <a href="https://divinium-115.github.io/PAGINA-YOQRs/" class="btn qrs" target="_blank">QRS</a>
+</div>
 
-        <a href="https://github.com/VictorFcoYPotasio/ElCuartelBlasters_Blasters2_SP/releases/download/v5.0/Parche-Espada.cia" class="btn espada" target="_blank">
-            Update Espada
-        </a>
+<br>
+<a href="index.html" class="back">← Volver</a>
 
-        <!-- 🟢 BOTÓN DLC -->
-        <a href="https://drive.google.com/file/d/18dJn6cNvXcCCkce1ftro5ZBNI3q52QMx/view?usp=sharing" class="btn dlc" target="_blank">
-            DLC
-        </a>
-
-        <br>
-        <a href="index.html" class="back">← Volver</a>
-
-    </div>
+</div>
 </div>
 
 </body>
