@@ -11,9 +11,9 @@ body {
     background: #f5f5f5;
 }
 
-/* 🔥 HEADER CON IMAGEN */
+/* 🔥 HEADER */
 .header {
-    background: url("img/fondoswitch.png") center/cover no-repeat;
+    background: url("img/fondoywj.png") center/cover no-repeat;
     height: 220px;
     display: flex;
     align-items: center;
@@ -21,7 +21,6 @@ body {
     position: relative;
 }
 
-/* OSCURECER FONDO SIN CAJA */
 .header::before {
     content: "";
     position: absolute;
@@ -29,18 +28,13 @@ body {
     background: rgba(0,0,0,0.3);
 }
 
-/* LOGO DEL JUEGO */
+/* LOGO */
 .game-logo {
     max-width: 300px;
     width: 100%;
-    display: block;
-    margin: 0 auto;
     position: relative;
     z-index: 1;
-
-    /* 🔥 sombra pro */
     filter: drop-shadow(0 6px 15px rgba(0,0,0,0.7));
-
     transition: transform 0.3s ease;
 }
 
@@ -97,6 +91,19 @@ body {
     box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
 
+/* 🔥 CREADOR */
+.creator {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.creator-name {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ff2d8f;
+    text-shadow: 0 0 8px rgba(255,45,143,0.6);
+}
+
 /* BOTÓN */
 .btn {
     display: inline-block;
@@ -131,18 +138,9 @@ body {
 
 /* 📱 RESPONSIVE */
 @media (max-width: 600px) {
-    .header {
-        height: 150px;
-    }
-
-    .game-logo {
-        max-width: 200px;
-    }
-
-    .gallery img {
-        width: 100px;
-        height: 70px;
-    }
+    .header { height: 150px; }
+    .game-logo { max-width: 200px; }
+    .gallery img { width: 100px; height: 70px; }
 }
 </style>
 
@@ -162,24 +160,26 @@ function cambiarImagen(src) {
 
 <body>
 
-<!-- 🔥 HEADER -->
 <div class="header">
-    <img src="img/yw1s.png" class="game-logo" alt="Yo-kai Watch 1 Logo">
+    <img src="img/logoywd.png" class="game-logo">
 </div>
 
 <div class="container">
     <div class="card">
 
-        <!-- IMAGEN PRINCIPAL -->
-        <img id="principal" class="main-img" src="img/swf1.png" alt="Imagen principal">
+        <img id="principal" class="main-img" src="img/ywd1.png">
 
-        <!-- GALERÍA -->
         <div class="gallery">
-            <img src="img/swf1.png" onclick="cambiarImagen(this.src)" alt="img1">
-            <img src="img/swf2.png" onclick="cambiarImagen(this.src)" alt="img2">
-            <img src="img/swf3.png" onclick="cambiarImagen(this.src)" alt="img3">
-            <img src="img/swf4.png" onclick="cambiarImagen(this.src)" alt="img4">
-            <img src="img/swf5.png" onclick="cambiarImagen(this.src)" alt="img5">
+            <img src="img/ywd1.png" onclick="cambiarImagen(this.src)">
+            <img src="img/ywd2.png" onclick="cambiarImagen(this.src)">
+            <img src="img/ywd3.png" onclick="cambiarImagen(this.src)">
+            <img src="img/ywd4.png" onclick="cambiarImagen(this.src)">
+            <img src="img/ywd5.png" onclick="cambiarImagen(this.src)">
+        </div>
+
+        <div class="creator">
+            <h2>Creador del parche</h2>
+            <div class="creator-name">Suprapote</div>
         </div>
 
         <h2>Traducción al español</h2>
@@ -189,22 +189,21 @@ function cambiarImagen(src) {
         </p>
 
         <ul style="text-align:left; display:inline-block;">
-            <li>Historia principal</li>
-            <li>Misiones secundarias</li>
             <li>Textos de interfaz</li>
-            <li>Texturas variadas</li>
+            <li>Todas las texturas del juego</li>
+            <li>Videos localizado</li>
+            <li>Voces en español</li>
         </ul>
 
         <h3>Estado</h3>
-        <p>En proceso</p>
+        <p>jugable</p>
 
         <h3>Plataforma</h3>
-        <p>Nintendo Switch / Emulador</p>
+        <p>Wii U / Emulador</p>
 
-        <a href="https://tu-link-de-descarga.com/archivo.zip" 
-           class="btn" 
-           target="_blank">
-            No disponible
+        <a href="https://drive.google.com/file/d/18jVxQNH4Pp_AqQigKU2Lm9W-tz7GVctj/view?usp=sharing" 
+           class="btn" target="_blank">
+            Obtener parche
         </a>
 
         <br>

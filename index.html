@@ -243,6 +243,7 @@ body {
 <div class="filtro">
 <h3>Plataforma</h3>
 <label><input type="checkbox" value="3ds" onchange="filtrar()"> Nintendo 3DS</label>
+<label><input type="checkbox" value="wiiu" onchange="filtrar()"> Wii U</label>
 <label><input type="checkbox" value="switch" onchange="filtrar()"> Nintendo Switch</label>
 <label><input type="checkbox" value="movil" onchange="filtrar()"> Smartphone</label>
 </div>
@@ -265,10 +266,20 @@ body {
 <div class="content">
 
 <div class="topbar">
-<div id="contador">4 proyectos</div>
+<div id="contador">5 proyectos</div>
 </div>
 
 <div class="grid">
+
+
+<div class="card" data-plataforma="wiiu" data-tipo="traduccion" data-estado="completo" onclick="location.href='ywd.html'">
+<img src="img/logodance.png">
+<div class="card-body">
+<b>Yo-kai Watch Dance</b>
+<p>Traducción completa.</p>
+<a href="ywd.html" class="btn">WII U</a>
+</div>
+</div>
 
 <div class="card" data-plataforma="switch" data-tipo="traduccion" data-estado="progreso" onclick="location.href='yw1.html'">
 <img src="img/SWITCH.png">
@@ -313,7 +324,9 @@ body {
 <script>
 function filtrar() {
 
-    const plataformas = Array.from(document.querySelectorAll('input[value="3ds"]:checked, input[value="switch"]:checked, input[value="movil"]:checked')).map(cb => cb.value);
+const plataformas = Array.from(
+    document.querySelectorAll('input[value="3ds"]:checked, input[value="switch"]:checked, input[value="movil"]:checked, input[value="wiiu"]:checked')
+).map(cb => cb.value);
 
     const tipos = Array.from(document.querySelectorAll('input[value="traduccion"]:checked, input[value="mod"]:checked')).map(cb => cb.value);
 
