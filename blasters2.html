@@ -68,7 +68,7 @@ body {
     transition: opacity 0.3s ease;
 }
 
-/* GALERÍA */
+/* GALERÍA NORMAL */
 .gallery {
     display: flex;
     gap: 10px;
@@ -89,6 +89,25 @@ body {
 .gallery img:hover {
     transform: scale(1.05);
     box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+/* SOLO QRs */
+.qr {
+    width: 120px !important;
+    height: 120px !important;
+    object-fit: contain !important;
+    background: white;
+    padding: 5px;
+}
+
+/* TEXTO QR */
+.gallery div {
+    text-align: center;
+}
+
+.gallery p {
+    margin-top: 5px;
+    font-size: 14px;
 }
 
 /* BOTONES */
@@ -161,6 +180,12 @@ body {
     .header { height: 150px; }
     .game-logo { max-width: 200px; }
     .gallery img { width: 100px; height: 70px; }
+
+    .qr {
+        cursor: default;
+        width: 90px !important;
+        height: 90px !important;
+    }
 }
 </style>
 
@@ -199,8 +224,6 @@ function cambiarImagen(src) {
 
 <h2>Traducción al español</h2>
 
-<p>Este parche traduce completamente el juego al español incluyendo:</p>
-
 <ul style="text-align:left; display:inline-block;">
 <li>Historia principal</li>
 <li>Misiones secundarias</li>
@@ -218,6 +241,54 @@ function cambiarImagen(src) {
 
 <h3>Plataforma</h3>
 <p>3DS / Emulador</p>
+
+<h3>Creditos</h3>
+
+<ul style="text-align:left; display:inline-block;">
+<li><b>Light y Sofuto</b> (Equipo B2 Inglés)<br>
+Creadores de este increíble mod.</li>
+
+<li><b>Yo_3ds, Darkverd y Nono</b> (Equipo B2 Francés)<br>
+Apoyo constante en herramientas, archivos y asistencia.</li>
+
+<li><b>VictorFco</b><br>
+Creación del servidor y gran apoyo en edición de textos.</li>
+
+<li><b>Bryxn</b><br>
+Edición y creación de los videos de introducción de ambos juegos.</li>
+
+<li><b>Mayo0618</b><br>
+Aportación de contenido y herramientas, edición de audios de ataques.</li>
+
+<li><b>Divinium115</b><br>
+Aportación de diseños, traducción, edición de texturas y audios.</li>
+</ul>
+
+<h3>QRS Descargables</h3>
+
+<div class="gallery">
+
+    <div>
+        <img src="img/juego_magnum.png" class="qr">
+        <p>Juego Magnum</p>
+    </div>
+
+    <div>
+        <img src="img/parche_magnum.png" class="qr">
+        <p>Update Magnum</p>
+    </div>
+
+    <div>
+        <img src="img/juego_espada.png" class="qr">
+        <p>Juego Espada</p>
+    </div>
+
+    <div>
+        <img src="img/parche_espada.png" class="qr">
+        <p>Update Espada</p>
+    </div>
+
+</div>
 
 <!-- MAGNUM -->
 <div class="btn-group">

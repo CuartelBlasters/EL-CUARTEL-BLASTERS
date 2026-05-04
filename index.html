@@ -297,34 +297,44 @@ body {
 </div>
 </div>
 
+<div class="card" data-plataforma="3ds" data-tipo="traduccion" data-estado="progreso" onclick="location.href='sango.html'">
+<img src="img/romance.png">
+<div class="card-body">
+<b>Romance Yo-kai de los tres reynos</b>
+<p>Proyecto en progreso.</p>
+<a href="romance.html" class="btn">3DS</a>
+</div>
+</div>
+
 </div>
 </div>
 </div>
 
 <script>
 function filtrar() {
-    const seleccionados = Array.from(document.querySelectorAll(".sidebar input:checked"))
-        .map(cb => cb.value);
+
+    const plataformas = Array.from(document.querySelectorAll('input[value="3ds"]:checked, input[value="switch"]:checked, input[value="movil"]:checked')).map(cb => cb.value);
+
+    const tipos = Array.from(document.querySelectorAll('input[value="traduccion"]:checked, input[value="mod"]:checked')).map(cb => cb.value);
+
+    const estados = Array.from(document.querySelectorAll('input[value="completo"]:checked, input[value="progreso"]:checked')).map(cb => cb.value);
 
     const cards = document.querySelectorAll(".card");
     let visibles = 0;
 
     cards.forEach(card => {
-        const valores = [
-            card.dataset.plataforma,
-            card.dataset.tipo,
-            card.dataset.estado
-        ];
 
-        const coincide = seleccionados.length === 0 ||
-                         seleccionados.every(f => valores.includes(f));
+        const matchPlataforma = plataformas.length === 0 || plataformas.includes(card.dataset.plataforma);
+        const matchTipo = tipos.length === 0 || tipos.includes(card.dataset.tipo);
+        const matchEstado = estados.length === 0 || estados.includes(card.dataset.estado);
 
-        if (coincide) {
+        if (matchPlataforma && matchTipo && matchEstado) {
             card.style.display = "block";
             visibles++;
         } else {
             card.style.display = "none";
         }
+
     });
 
     document.getElementById("contador").textContent = visibles + " proyectos";
