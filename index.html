@@ -194,6 +194,54 @@ body {
     text-decoration: none;
     border-radius: 5px;
 }
+@media (max-width: 768px) {
+
+    .container {
+        flex-direction: column;
+    }
+
+    .header {
+        height: 150px;
+        padding-left: 15px;
+    }
+
+    .hero-box {
+        max-width: 92%;
+        padding: 14px;
+    }
+
+    .hero-box h1 {
+        font-size: 22px;
+    }
+
+    .hero-logo {
+        width: 85px;
+    }
+
+    .content {
+        padding: 12px;
+    }
+
+    .sidebar {
+        width: 100%;
+        padding: 12px;
+        order: 2;
+    }
+
+    .grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 14px;
+    }
+
+    .social-sidebar a img {
+        width: 34px;
+        height: 34px;
+    }
+
+    .card-body {
+        padding: 12px;
+    }
+}
 </style>
 </head>
 
