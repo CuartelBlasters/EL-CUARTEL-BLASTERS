@@ -194,6 +194,7 @@ body {
     text-decoration: none;
     border-radius: 5px;
 }
+
 @media (max-width: 768px) {
 
     .container {
@@ -201,13 +202,17 @@ body {
     }
 
     .header {
-        height: 150px;
-        padding-left: 15px;
+    height: 150px;
+    padding-left: 10px;
+    padding-right: 10px;
+    justify-content: flex-start;
     }
 
     .hero-box {
-        max-width: 92%;
-        padding: 14px;
+    width: 100%;
+    max-width: 100%;
+    padding: 14px;
+    box-sizing: border-box;
     }
 
     .hero-box h1 {
@@ -241,6 +246,14 @@ body {
     .card-body {
         padding: 12px;
     }
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    overflow-x: hidden;
+}
 }
 </style>
 </head>
