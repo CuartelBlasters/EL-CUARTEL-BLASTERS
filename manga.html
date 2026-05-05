@@ -1,80 +1,160 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Manga App PRO</title>
+<title>Manga App</title>
 
 <style>
 body {
     margin: 0;
-    font-family: Arial;
-    background: url("img/fondo.jpg") center/cover no-repeat fixed;
+    font-family: Arial, sans-serif;
+    background: #0d0d0d;
     color: white;
 }
 
-.view { display:none; padding:20px; text-align:center; }
+/* VISTAS */
+.view {
+    display:none;
+    padding:20px;
+    text-align:center;
+}
 .active { display:block; }
 
-.grid {
+/* SERIES */
+.series-container{
     display:flex;
-    flex-wrap:wrap;
     justify-content:center;
-    gap:20px;
+    gap:25px;
+    flex-wrap:wrap;
 }
 
-.card {
-    width:180px;
-    background:#222;
+.series-card{
+    width:220px;
+    background:#1a1a1a;
     border-radius:12px;
     overflow:hidden;
     cursor:pointer;
-    transition:0.2s;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-.card:hover { transform:scale(1.05); }
 
-.card img {
+.series-card:hover{
+    transform: translateY(-5px);
+    box-shadow: 0 8px 18px rgba(0,0,0,0.5);
+}
+
+.series-card:active{
+    transform: scale(0.97);
+}
+
+.series-card img{
     width:100%;
-    height:240px;
-    object-fit:cover;
 }
 
-.btn {
-    background:#333;
-    padding:8px 12px;
-    border-radius:6px;
-    display:inline-block;
-    margin:10px;
-    cursor:pointer;
+.series-title{
+    padding:10px;
 }
+
+/* CAPÍTULOS */
+.grid {
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 160px));
+    gap:20px;
+    justify-content:center;
+}
+
+.card {
+    background:#1a1a1a;
+    padding:18px;
+    border-radius:12px;
+    cursor:pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 22px rgba(0,0,0,0.5);
+}
+
+.card:active{
+    transform: scale(0.96);
+}
+
+/* BOTÓN */
+.btn {
+    background:#222;
+    padding:12px;
+    border-radius:10px;
+    width:200px;
+    margin:20px auto;
+    cursor:pointer;
+    transition: all 0.2s ease;
+}
+
+.btn:hover{
+    background:#333;
+    transform: translateY(-3px);
+}
+
+.btn:active{
+    transform: scale(0.96);
+}
+
+/* LECTOR */
+#lector { padding:0; }
 
 #viewer {
-    height:100vh;
+    max-width:900px;
+    margin:auto;
+}
+
+/* PÁGINAS */
+.page {
+    width:100%;
+    margin:15px 0;
+    border-radius:6px;
+    box-shadow: 
+        0 10px 25px rgba(0,0,0,0.7),
+        0 0 40px rgba(0,0,0,0.5);
+}
+
+/* BOTÓN FLOTANTE */
+.fab {
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    width:55px;
+    height:55px;
+    background:#1f1f1f;
+    border-radius:14px;
     display:flex;
     justify-content:center;
     align-items:center;
-}
-
-#img {
-    max-width:100%;
-    max-height:100vh;
-    transition:transform 0.2s;
-}
-
-.nav {
-    position:fixed;
-    top:50%;
-    font-size:40px;
+    font-size:22px;
     cursor:pointer;
+    box-shadow:0 5px 20px rgba(0,0,0,0.6);
+    opacity:0;
+    transition: all 0.25s ease;
 }
 
-#prev { left:10px; }
-#next { right:10px; }
+.fab:hover{ transform: scale(1.1); }
+.fab:active{ transform: scale(0.9); }
+.fab.show { opacity:1; }
 
-#info {
-    position:fixed;
-    bottom:10px;
-    width:100%;
-    text-align:center;
+/* 📱 BOTÓN MÁS GRANDE EN MÓVIL */
+@media (max-width: 768px) {
+
+    .fab {
+        width: 70px;
+        height: 70px;
+        font-size: 28px;
+        bottom: 25px;
+        right: 20px;
+        border-radius: 18px;
+    }
+
 }
 </style>
 </head>
@@ -83,229 +163,159 @@ body {
 
 <!-- SERIES -->
 <div id="series" class="view active">
-    <div class="btn" onclick="window.location.href='index.html'">← Volver</div>
     <h1>Series</h1>
-    <div class="grid" id="listaSeries"></div>
+
+    <div class="series-container">
+        <div class="series-card" onclick="verCaps('sw','Shadowside')">
+            <img src="img/sw/portada.jpg">
+            <div class="series-title">Shadowside</div>
+        </div>
+    </div>
+
+    <div class="btn" onclick="irInicio()">🏠 Inicio</div>
 </div>
 
 <!-- CAPÍTULOS -->
 <div id="caps" class="view">
-    <div class="btn" onclick="mostrar('series')">← Volver</div>
     <h1 id="tituloSerie"></h1>
     <div class="grid" id="listaCaps"></div>
+
+    <div class="btn" onclick="mostrar('series')">← Volver</div>
 </div>
 
 <!-- LECTOR -->
 <div id="lector" class="view">
-    <div class="btn" onclick="mostrar('caps')">← Volver</div>
-    <div class="btn" onclick="toggleModo()">Modo Manga</div>
-
-    <div id="prev" class="nav" onclick="anterior()">⟨</div>
-
-    <div id="viewer">
-        <img id="img">
-    </div>
-
-    <div id="next" class="nav" onclick="siguiente()">⟩</div>
-
-    <div id="info"></div>
+    <div id="viewer"></div>
 </div>
 
-<script>
-let serieActual = "";
-let capActual = "";
-let pagina = 1;
-let total = 0;
-let modoManga = localStorage.getItem("modoManga") === "true";
-let zoom = 1;
+<!-- BOTÓN FLOTANTE -->
+<div id="backBtn" class="fab" onclick="volver()">←</div>
 
-/* CAMBIAR VISTA */
+<script>
+let capActual="";
+let hideBtn;
+
+/* INDEX */
+function irInicio(){
+    window.location.href="index.html";
+}
+
+/* VISTAS */
 function mostrar(id){
     document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
     document.getElementById(id).classList.add("active");
+    history.pushState({vista:id},"");
 }
 
-/* DETECTAR SERIES AUTOMÁTICAMENTE */
-async function detectarSeries(){
-    const cont = document.getElementById("listaSeries");
-    cont.innerHTML = "";
-
-    let encontradas = 0;
-
-    // Buscar carpetas tipo img/serie/sw1/1.png
-    const posibles = ["shadowsside","yw","serie1","serie2"];
-
-    for (let s of posibles){
-        let existe = await existeImagen(`img/${s}/sw1/1.png`)
-                   || await existeImagen(`img/${s}/sw1/1.jpg`);
-
-        if (existe){
-            encontradas++;
-
-            let div = document.createElement("div");
-            div.className = "card";
-            div.innerHTML = `
-                <img src="img/${s}/portada.jpg" onerror="this.src='img/fallback.jpg'">
-                <p>${s}</p>
-            `;
-            div.onclick = ()=>verCaps(s,s);
-            cont.appendChild(div);
-        }
-    }
-
-    // MODO LEGACY (img/sw1 directamente)
-    let legacy = await existeImagen(`img/sw1/1.png`) || await existeImagen(`img/sw1/1.jpg`);
-
-    if (legacy){
-        let div = document.createElement("div");
-        div.className = "card";
-        div.innerHTML = `<p>Manga</p>`;
-        div.onclick = ()=>verCaps("legacy","Manga");
-        cont.appendChild(div);
-    }
+/* VOLVER */
+function volver(){
+    history.back();
 }
 
-/* VER CAPÍTULOS */
+/* HISTORIAL */
+window.onpopstate = function(e){
+    if(e.state){
+        document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
+        document.getElementById(e.state.vista).classList.add("active");
+    } else {
+        mostrar("series");
+    }
+};
+
+/* SERIES */
 function verCaps(serie,nombre){
-    serieActual = serie;
     mostrar("caps");
-    document.getElementById("tituloSerie").innerText = nombre;
-    detectarCapitulos();
+    document.getElementById("tituloSerie").innerText=nombre;
+    detectarCaps();
 }
 
-/* DETECTAR CAPÍTULOS */
-async function detectarCapitulos(){
-    let cont = document.getElementById("listaCaps");
-    cont.innerHTML = "";
+/* CAPÍTULOS */
+async function detectarCaps(){
+    let cont=document.getElementById("listaCaps");
+    cont.innerHTML="";
 
     for(let i=1;i<=50;i++){
-        let base = serieActual==="legacy"
-            ? `img/sw${i}/1`
-            : `img/${serieActual}/sw${i}/1`;
-
-        let existe = await existeImagen(base+".png") || await existeImagen(base+".jpg");
-
-        if(existe){
-            let div=document.createElement("div");
-            div.className="card";
-            div.innerHTML=`<p>Cap ${i}</p>`;
-            div.onclick=()=>abrirCap("sw"+i);
-            cont.appendChild(div);
+        let ok=await existe(`img/sw/sw${i}/1.png`);
+        if(ok){
+            let d=document.createElement("div");
+            d.className="card";
+            d.innerText="Cap "+i;
+            d.onclick=()=>abrir("sw"+i);
+            cont.appendChild(d);
         }
     }
 }
 
-/* ABRIR CAP */
-async function abrirCap(cap){
+/* LECTOR */
+async function abrir(cap){
     capActual=cap;
-    pagina=1;
-    total=0;
-
     mostrar("lector");
 
+    let viewer=document.getElementById("viewer");
+    viewer.innerHTML="";
+
     for(let i=1;i<=300;i++){
-        let base = serieActual==="legacy"
-            ? `img/${cap}/${i}`
-            : `img/${serieActual}/${cap}/${i}`;
+        let src=`img/sw/${cap}/${i}.png`;
+        let ok=await existe(src);
+        if(!ok) break;
 
-        let existe = await existeImagen(base+".png") || await existeImagen(base+".jpg");
+        let img=document.createElement("img");
+        img.src=src;
+        img.className="page";
+        img.loading="lazy";
 
-        if(!existe) break;
-        total=i;
+        viewer.appendChild(img);
     }
 
-    let key = serieActual+"_"+cap;
-    let guardada = localStorage.getItem(key);
-    if(guardada) pagina=parseInt(guardada);
+    // 🔥 RESTAURAR POR PORCENTAJE
+    let progreso = localStorage.getItem(cap);
 
-    cargar();
+    if(progreso){
+        let intento = setInterval(()=>{
+            let alturaTotal = document.body.scrollHeight - window.innerHeight;
+
+            if(alturaTotal > 0){
+                let pos = alturaTotal * progreso;
+                window.scrollTo(0, pos);
+                clearInterval(intento);
+            }
+        }, 100);
+    }
 }
 
-/* EXISTE IMG */
-function existeImagen(src){
-    return new Promise(res=>{
-        let img=new Image();
-        img.onload=()=>res(true);
-        img.onerror=()=>res(false);
-        img.src=src;
+/* SCROLL + GUARDADO */
+window.addEventListener("scroll",()=>{
+    let btn=document.getElementById("backBtn");
+
+    if(window.scrollY > 100){
+        btn.classList.add("show");
+
+        clearTimeout(hideBtn);
+        hideBtn=setTimeout(()=>btn.classList.remove("show"),2000);
+    }
+
+    if(capActual){
+        let alturaTotal = document.body.scrollHeight - window.innerHeight;
+
+        if(alturaTotal > 0){
+            let progreso = window.scrollY / alturaTotal;
+            localStorage.setItem(capActual, progreso);
+        }
+    }
+});
+
+/* EXISTE */
+function existe(src){
+    return new Promise(r=>{
+        let i=new Image();
+        i.onload=()=>r(true);
+        i.onerror=()=>r(false);
+        i.src=src;
     });
 }
 
-/* CARGAR */
-function cargar(){
-    let base = serieActual==="legacy"
-        ? `img/${capActual}/${pagina}`
-        : `img/${serieActual}/${capActual}/${pagina}`;
-
-    document.getElementById("img").src = base+".png";
-    document.getElementById("img").onerror=()=>{
-        document.getElementById("img").src = base+".jpg";
-    };
-
-    document.getElementById("info").innerText=pagina+"/"+total;
-
-    localStorage.setItem(serieActual+"_"+capActual,pagina);
-
-    precargar();
-}
-
-/* PRECARGA */
-function precargar(){
-    let next = pagina+1;
-    let base = serieActual==="legacy"
-        ? `img/${capActual}/${next}`
-        : `img/${serieActual}/${capActual}/${next}`;
-
-    let img=new Image();
-    img.src=base+".png";
-}
-
-/* NAV */
-function siguiente(){ if(pagina<total){pagina++;cargar();}}
-function anterior(){ if(pagina>1){pagina--;cargar();}}
-
-/* MODO MANGA */
-function toggleModo(){
-    modoManga=!modoManga;
-    localStorage.setItem("modoManga",modoManga);
-}
-
-/* TECLADO */
-document.addEventListener("keydown",e=>{
-    if(!modoManga){
-        if(e.key==="ArrowRight") siguiente();
-        if(e.key==="ArrowLeft") anterior();
-    }else{
-        if(e.key==="ArrowRight") anterior();
-        if(e.key==="ArrowLeft") siguiente();
-    }
-});
-
-/* TOUCH */
-let startX=0;
-document.addEventListener("touchstart",e=>startX=e.touches[0].clientX);
-document.addEventListener("touchend",e=>{
-    let endX=e.changedTouches[0].clientX;
-
-    if(!modoManga){
-        if(endX<startX-50) siguiente();
-        if(endX>startX+50) anterior();
-    }else{
-        if(endX<startX-50) anterior();
-        if(endX>startX+50) siguiente();
-    }
-});
-
-/* ZOOM */
-document.getElementById("img").addEventListener("wheel",e=>{
-    e.preventDefault();
-    zoom+=e.deltaY*-0.001;
-    zoom=Math.min(Math.max(1,zoom),3);
-    document.getElementById("img").style.transform=`scale(${zoom})`;
-});
-
-/* INIT */
-detectarSeries();
+/* INICIO */
+history.replaceState({vista:"series"},"");
 </script>
 
 </body>
