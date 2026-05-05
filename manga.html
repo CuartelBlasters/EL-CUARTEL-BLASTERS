@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Manga App PRO</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial;
+    background: url("img/fondo.jpg") center/cover no-repeat fixed;
+    color: white;
+}
+
+.view { display:none; padding:20px; text-align:center; }
+.active { display:block; }
+
+.grid {
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:20px;
+}
+
+.card {
+    width:180px;
+    background:#222;
+    border-radius:12px;
+    overflow:hidden;
+    cursor:pointer;
+    transition:0.2s;
+}
+.card:hover { transform:scale(1.05); }
+
+.card img {
+    width:100%;
+    height:240px;
+    object-fit:cover;
+}
+
+.btn {
+    background:#333;
+    padding:8px 12px;
+    border-radius:6px;
+    display:inline-block;
+    margin:10px;
+    cursor:pointer;
+}
+
+#viewer {
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+#img {
+    max-width:100%;
+    max-height:100vh;
+    transition:transform 0.2s;
+}
+
+.nav {
+    position:fixed;
+    top:50%;
+    font-size:40px;
+    cursor:pointer;
+}
+
+#prev { left:10px; }
+#next { right:10px; }
+
+#info {
+    position:fixed;
+    bottom:10px;
+    width:100%;
+    text-align:center;
+}
+</style>
+</head>
+
+<body>
+
+<!-- SERIES -->
+<div id="series" class="view active">
+    <div class="btn" onclick="window.location.href='index.html'">← Volver</div>
+    <h1>Series</h1>
+    <div class="grid" id="listaSeries"></div>
+</div>
+
+<!-- CAPÍTULOS -->
+<div id="caps" class="view">
+    <div class="btn" onclick="mostrar('series')">← Volver</div>
+    <h1 id="tituloSerie"></h1>
+    <div class="grid" id="listaCaps"></div>
+</div>
+
+<!-- LECTOR -->
+<div id="lector" class="view">
+    <div class="btn" onclick="mostrar('caps')">← Volver</div>
+    <div class="btn" onclick="toggleModo()">Modo Manga</div>
+
+    <div id="prev" class="nav" onclick="anterior()">⟨</div>
+
+    <div id="viewer">
+        <img id="img">
+    </div>
+
+    <div id="next" class="nav" onclick="siguiente()">⟩</div>
+
+    <div id="info"></div>
+</div>
+
+<script>
+let serieActual = "";
+let capActual = "";
+let pagina = 1;
+let total = 0;
+let modoManga = localStorage.getItem("modoManga") === "true";
+let zoom = 1;
+
+/* CAMBIAR VISTA */
+function mostrar(id){
+    document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
+    document.getElementById(id).classList.add("active");
+}
+
+/* DETECTAR SERIES AUTOMÁTICAMENTE */
+async function detectarSeries(){
+    const cont = document.getElementById("listaSeries");
+    cont.innerHTML = "";
+
+    let encontradas = 0;
+
+    // Buscar carpetas tipo img/serie/sw1/1.png
+    const posibles = ["shadowsside","yw","serie1","serie2"];
+
+    for (let s of posibles){
+        let existe = await existeImagen(`img/${s}/sw1/1.png`)
+                   || await existeImagen(`img/${s}/sw1/1.jpg`);
+
+        if (existe){
+            encontradas++;
+
+            let div = document.createElement("div");
+            div.className = "card";
+            div.innerHTML = `
+                <img src="img/${s}/portada.jpg" onerror="this.src='img/fallback.jpg'">
+                <p>${s}</p>
+            `;
+            div.onclick = ()=>verCaps(s,s);
+            cont.appendChild(div);
+        }
+    }
+
+    // MODO LEGACY (img/sw1 directamente)
+    let legacy = await existeImagen(`img/sw1/1.png`) || await existeImagen(`img/sw1/1.jpg`);
+
+    if (legacy){
+        let div = document.createElement("div");
+        div.className = "card";
+        div.innerHTML = `<p>Manga</p>`;
+        div.onclick = ()=>verCaps("legacy","Manga");
+        cont.appendChild(div);
+    }
+}
+
+/* VER CAPÍTULOS */
+function verCaps(serie,nombre){
+    serieActual = serie;
+    mostrar("caps");
+    document.getElementById("tituloSerie").innerText = nombre;
+    detectarCapitulos();
+}
+
+/* DETECTAR CAPÍTULOS */
+async function detectarCapitulos(){
+    let cont = document.getElementById("listaCaps");
+    cont.innerHTML = "";
+
+    for(let i=1;i<=50;i++){
+        let base = serieActual==="legacy"
+            ? `img/sw${i}/1`
+            : `img/${serieActual}/sw${i}/1`;
+
+        let existe = await existeImagen(base+".png") || await existeImagen(base+".jpg");
+
+        if(existe){
+            let div=document.createElement("div");
+            div.className="card";
+            div.innerHTML=`<p>Cap ${i}</p>`;
+            div.onclick=()=>abrirCap("sw"+i);
+            cont.appendChild(div);
+        }
+    }
+}
+
+/* ABRIR CAP */
+async function abrirCap(cap){
+    capActual=cap;
+    pagina=1;
+    total=0;
+
+    mostrar("lector");
+
+    for(let i=1;i<=300;i++){
+        let base = serieActual==="legacy"
+            ? `img/${cap}/${i}`
+            : `img/${serieActual}/${cap}/${i}`;
+
+        let existe = await existeImagen(base+".png") || await existeImagen(base+".jpg");
+
+        if(!existe) break;
+        total=i;
+    }
+
+    let key = serieActual+"_"+cap;
+    let guardada = localStorage.getItem(key);
+    if(guardada) pagina=parseInt(guardada);
+
+    cargar();
+}
+
+/* EXISTE IMG */
+function existeImagen(src){
+    return new Promise(res=>{
+        let img=new Image();
+        img.onload=()=>res(true);
+        img.onerror=()=>res(false);
+        img.src=src;
+    });
+}
+
+/* CARGAR */
+function cargar(){
+    let base = serieActual==="legacy"
+        ? `img/${capActual}/${pagina}`
+        : `img/${serieActual}/${capActual}/${pagina}`;
+
+    document.getElementById("img").src = base+".png";
+    document.getElementById("img").onerror=()=>{
+        document.getElementById("img").src = base+".jpg";
+    };
+
+    document.getElementById("info").innerText=pagina+"/"+total;
+
+    localStorage.setItem(serieActual+"_"+capActual,pagina);
+
+    precargar();
+}
+
+/* PRECARGA */
+function precargar(){
+    let next = pagina+1;
+    let base = serieActual==="legacy"
+        ? `img/${capActual}/${next}`
+        : `img/${serieActual}/${capActual}/${next}`;
+
+    let img=new Image();
+    img.src=base+".png";
+}
+
+/* NAV */
+function siguiente(){ if(pagina<total){pagina++;cargar();}}
+function anterior(){ if(pagina>1){pagina--;cargar();}}
+
+/* MODO MANGA */
+function toggleModo(){
+    modoManga=!modoManga;
+    localStorage.setItem("modoManga",modoManga);
+}
+
+/* TECLADO */
+document.addEventListener("keydown",e=>{
+    if(!modoManga){
+        if(e.key==="ArrowRight") siguiente();
+        if(e.key==="ArrowLeft") anterior();
+    }else{
+        if(e.key==="ArrowRight") anterior();
+        if(e.key==="ArrowLeft") siguiente();
+    }
+});
+
+/* TOUCH */
+let startX=0;
+document.addEventListener("touchstart",e=>startX=e.touches[0].clientX);
+document.addEventListener("touchend",e=>{
+    let endX=e.changedTouches[0].clientX;
+
+    if(!modoManga){
+        if(endX<startX-50) siguiente();
+        if(endX>startX+50) anterior();
+    }else{
+        if(endX<startX-50) anterior();
+        if(endX>startX+50) siguiente();
+    }
+});
+
+/* ZOOM */
+document.getElementById("img").addEventListener("wheel",e=>{
+    e.preventDefault();
+    zoom+=e.deltaY*-0.001;
+    zoom=Math.min(Math.max(1,zoom),3);
+    document.getElementById("img").style.transform=`scale(${zoom})`;
+});
+
+/* INIT */
+detectarSeries();
+</script>
+
+</body>
+</html>
