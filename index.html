@@ -272,7 +272,7 @@ html, body {
             <img src="img/LOGO.png" class="hero-logo">
             <h1>BIENVENIDO</h1>
         </div>
-        <p>Descarga nuestras traducciones o juegos de Yo-kai watch.</p>
+        <p>Descarga nuestros parches de traduccion de Yo-kai watch.</p>
     </div>
 </div>
 
@@ -312,8 +312,6 @@ html, body {
 <label><input type="checkbox" value="3ds" onchange="filtrar()"> Nintendo 3DS</label>
 <label><input type="checkbox" value="wiiu" onchange="filtrar()"> Wii U</label>
 <label><input type="checkbox" value="switch" onchange="filtrar()"> Nintendo Switch</label>
-<label><input type="checkbox" value="movil" onchange="filtrar()"> Smartphone</label>
-<label><input type="checkbox" value="manga" onchange="filtrar()"> Manga</label>
 </div>
 
 <div class="filtro">
@@ -339,15 +337,6 @@ html, body {
 
 <div class="grid">
 
-<div class="card" data-plataforma="manga" data-tipo="traduccion" data-estado="progreso" onclick="location.href='manga.html'">
-<img src="img/manga.png">
-<div class="card-body">
-<b>El Cuartel Manga</b>
-<p>Mangas nuevos siempre.</p>
-<a href="manga.html" class="btn">Manga</a>
-</div>
-</div>
-
 <div class="card" data-plataforma="wiiu" data-tipo="traduccion" data-estado="completo" onclick="location.href='ywd.html'">
 <img src="img/logodance.png">
 <div class="card-body">
@@ -363,15 +352,6 @@ html, body {
 <b>Yo-kai Watch 1 Switch</b>
 <p>Proyecto en progreso.</p>
 <a href="yw1.html" class="btn">Switch</a>
-</div>
-</div>
-
-<div class="card" data-plataforma="movil" data-tipo="traduccion" data-estado="progreso" onclick="location.href='yw1m.html'">
-<img src="img/movil.png">
-<div class="card-body">
-<b>Yo-kai Watch 1 Smartphone</b>
-<p>Proyecto en progreso.</p>
-<a href="yw1m.html" class="btn">Teléfono</a>
 </div>
 </div>
 
@@ -402,7 +382,7 @@ html, body {
 function filtrar() {
 
 const plataformas = Array.from(
-    document.querySelectorAll('input[value="3ds"]:checked, input[value="switch"]:checked, input[value="movil"]:checked, input[value="wiiu"]:checked, input[value="manga"]:checked')
+    document.querySelectorAll('input[value="3ds"]:checked, input[value="switch"]:checked, input[value="wiiu"]:checked')
 ).map(cb => cb.value);
 
     const tipos = Array.from(document.querySelectorAll('input[value="traduccion"]:checked, input[value="mod"]:checked')).map(cb => cb.value);
